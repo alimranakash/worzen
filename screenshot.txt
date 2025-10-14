@@ -1,0 +1,25 @@
+SCREENSHOT PLACEHOLDER
+
+To complete your WordPress theme, you need to add a screenshot.png file.
+
+Requirements:
+- File name: screenshot.png
+- Dimensions: 1200 x 900 pixels (4:3 ratio)
+- Format: PNG
+- Location: Root of the theme folder (same level as style.css)
+
+The screenshot should show:
+- Your homepage design
+- Header with logo and navigation
+- Hero section
+- Product cards
+- Footer
+
+You can create this screenshot by:
+1. Setting up the theme on a local WordPress installation
+2. Taking a screenshot of the homepage
+3. Cropping it to 1200 x 900 pixels
+4. Saving it as screenshot.png in the theme root
+
+This screenshot will be displayed in the WordPress admin when users browse themes.
+

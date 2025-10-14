@@ -1,0 +1,38 @@
+# WordPress
+*.log
+.htaccess
+
+# Node modules (if using build process)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Compiled CSS (if using build process)
+assets/css/compiled/
+
+# Environment files
+.env
+.env.local
+
