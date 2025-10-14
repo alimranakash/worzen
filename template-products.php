@@ -288,6 +288,135 @@ get_header();
                 </div>
             </div>
 
+            <!-- Product Card 6: DeleteBulk -->
+            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins free">
+                <div class="relative overflow-hidden group">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/deletebulk.jpg" alt="DeleteBulk Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%236366f1%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3EDeleteBulk%3C/text%3E%3C/svg%3E'">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Free</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
+                        <div class="flex items-center text-yellow-400">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            </svg>
+                            <span class="ml-1 text-gray-600 text-sm">5.0</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">DeleteBulk</h3>
+                    <p class="text-gray-600 mb-4">Clean up your WordPress site in minutes. Bulk delete posts, pages, comments, and more with advanced filtering options.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl font-bold text-green-600">Free</div>
+                        <div class="text-sm text-gray-500">
+                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                            500+ users
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="<?php echo esc_url(home_url('/deletebulk')); ?>" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
+                            View Details
+                        </a>
+                        <a href="https://wordpress.org/plugins/deletebulk/" target="_blank" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 7: Product View Count -->
+            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins free">
+                <div class="relative overflow-hidden group">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-view-count.jpg" alt="Product View Count Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%238b5cf6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2240%22 fill=%22%23ffffff%22%3EProduct View Count%3C/text%3E%3C/svg%3E'">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Free</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
+                        <div class="flex items-center text-yellow-400">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            </svg>
+                            <span class="ml-1 text-gray-600 text-sm">4.8</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Product View Count</h3>
+                    <p class="text-gray-600 mb-4">Track WooCommerce product views with real-time analytics, bot detection, and comprehensive reporting dashboard.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl font-bold text-green-600">Free</div>
+                        <div class="text-sm text-gray-500">
+                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                            200+ users
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="<?php echo esc_url(home_url('/product-view-count')); ?>" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
+                            View Details
+                        </a>
+                        <a href="https://wordpress.org/plugins/product-view-count/" target="_blank" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Card 8: Suffix Master -->
+            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins premium">
+                <div class="relative overflow-hidden group">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/suffix-master.jpg" alt="Suffix Master Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%23ec4899%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3ESuffix Master%3C/text%3E%3C/svg%3E'">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
+                        <div class="flex items-center text-yellow-400">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            </svg>
+                            <span class="ml-1 text-gray-600 text-sm">5.0</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Suffix Master Pro</h3>
+                    <p class="text-gray-600 mb-4">Smart title, price & content branding for WordPress. Add custom suffixes to product titles, prices, and content automatically.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="text-3xl font-bold text-primary">$39</div>
+                        <div class="text-sm text-gray-500">
+                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                            1,500+ users
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="<?php echo esc_url(home_url('/suffix-master')); ?>" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
+                            View Details
+                        </a>
+                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- No Results Message -->

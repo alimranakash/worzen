@@ -494,3 +494,240 @@ function worzen_contact_form_messages() {
 }
 add_action('wp_body_open', 'worzen_contact_form_messages');
 
+/**
+ * ============================================================================
+ * PRODUCT LANDING PAGE META BOXES
+ * ============================================================================
+ *
+ * Add custom meta boxes for product landing pages
+ * Allows easy management of product details like price, URLs, ratings, etc.
+ */
+
+/**
+ * Add Product Meta Box
+ */
+function worzen_add_product_meta_boxes() {
+    add_meta_box(
+        'product_details',
+        'Product Details',
+        'worzen_product_details_callback',
+        'page',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'worzen_add_product_meta_boxes');
+
+/**
+ * Product Meta Box Callback
+ */
+function worzen_product_details_callback($post) {
+    // Add nonce for security
+    wp_nonce_field('worzen_product_meta', 'worzen_product_meta_nonce');
+
+    // Get existing values
+    $tagline = get_post_meta($post->ID, 'product_tagline', true);
+    $price = get_post_meta($post->ID, 'product_price', true);
+    $type = get_post_meta($post->ID, 'product_type', true);
+    $category = get_post_meta($post->ID, 'product_category', true);
+    $demo_url = get_post_meta($post->ID, 'product_demo_url', true);
+    $download_url = get_post_meta($post->ID, 'product_download_url', true);
+    $purchase_url = get_post_meta($post->ID, 'product_purchase_url', true);
+    $wordpress_url = get_post_meta($post->ID, 'product_wordpress_url', true);
+    $rating = get_post_meta($post->ID, 'product_rating', true);
+    $users = get_post_meta($post->ID, 'product_users', true);
+    $version = get_post_meta($post->ID, 'product_version', true);
+    ?>
+
+    <style>
+        .worzen-product-meta-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .worzen-product-meta-table th {
+            width: 200px;
+            text-align: left;
+            padding: 15px 10px;
+            font-weight: 600;
+            vertical-align: top;
+        }
+        .worzen-product-meta-table td {
+            padding: 15px 10px;
+        }
+        .worzen-product-meta-table input[type="text"],
+        .worzen-product-meta-table input[type="url"],
+        .worzen-product-meta-table select {
+            width: 100%;
+            max-width: 600px;
+        }
+        .worzen-product-meta-table .description {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .worzen-meta-section {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #6366f1;
+        }
+        .worzen-meta-section h4 {
+            margin: 0 0 10px 0;
+            color: #6366f1;
+        }
+    </style>
+
+    <div class="worzen-meta-section">
+        <h4>📝 Basic Information</h4>
+        <table class="worzen-product-meta-table">
+            <tr>
+                <th><label for="product_tagline">Product Tagline *</label></th>
+                <td>
+                    <input type="text" id="product_tagline" name="product_tagline" value="<?php echo esc_attr($tagline); ?>" class="large-text" placeholder="e.g., Clean up your WordPress site in minutes">
+                    <p class="description">Short, compelling description (shown in hero section)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_type">Product Type *</label></th>
+                <td>
+                    <select id="product_type" name="product_type">
+                        <option value="">-- Select Type --</option>
+                        <option value="free" <?php selected($type, 'free'); ?>>Free</option>
+                        <option value="premium" <?php selected($type, 'premium'); ?>>Premium</option>
+                    </select>
+                    <p class="description">Is this a free or premium product?</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_category">Category *</label></th>
+                <td>
+                    <select id="product_category" name="product_category">
+                        <option value="">-- Select Category --</option>
+                        <option value="plugin" <?php selected($category, 'plugin'); ?>>Plugin</option>
+                        <option value="theme" <?php selected($category, 'theme'); ?>>Theme</option>
+                    </select>
+                    <p class="description">Plugin or Theme?</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_price">Price</label></th>
+                <td>
+                    <input type="text" id="product_price" name="product_price" value="<?php echo esc_attr($price); ?>" placeholder="39" style="width: 100px;">
+                    <p class="description">For premium products only (number only, no $ sign)</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="worzen-meta-section">
+        <h4>⭐ Product Stats</h4>
+        <table class="worzen-product-meta-table">
+            <tr>
+                <th><label for="product_rating">Rating</label></th>
+                <td>
+                    <input type="text" id="product_rating" name="product_rating" value="<?php echo esc_attr($rating); ?>" placeholder="5.0" style="width: 100px;">
+                    <p class="description">Star rating (e.g., 4.8, 5.0)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_users">Active Users</label></th>
+                <td>
+                    <input type="text" id="product_users" name="product_users" value="<?php echo esc_attr($users); ?>" placeholder="500+" style="width: 150px;">
+                    <p class="description">Number of active installations (e.g., 500+, 1,000+)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_version">Version</label></th>
+                <td>
+                    <input type="text" id="product_version" name="product_version" value="<?php echo esc_attr($version); ?>" placeholder="1.0.0" style="width: 150px;">
+                    <p class="description">Current version number</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="worzen-meta-section">
+        <h4>🔗 URLs & Links</h4>
+        <table class="worzen-product-meta-table">
+            <tr>
+                <th><label for="product_demo_url">Demo URL</label></th>
+                <td>
+                    <input type="url" id="product_demo_url" name="product_demo_url" value="<?php echo esc_url($demo_url); ?>" class="large-text" placeholder="https://demo.yoursite.com">
+                    <p class="description">Link to live demo (optional)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_download_url">Download URL</label></th>
+                <td>
+                    <input type="url" id="product_download_url" name="product_download_url" value="<?php echo esc_url($download_url); ?>" class="large-text" placeholder="https://wordpress.org/plugins/your-plugin/">
+                    <p class="description">For FREE products - WordPress.org download link</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_purchase_url">Purchase URL</label></th>
+                <td>
+                    <input type="url" id="product_purchase_url" name="product_purchase_url" value="<?php echo esc_url($purchase_url); ?>" class="large-text" placeholder="https://yoursite.com/checkout">
+                    <p class="description">For PREMIUM products - Checkout/purchase page link</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_wordpress_url">WordPress.org URL</label></th>
+                <td>
+                    <input type="url" id="product_wordpress_url" name="product_wordpress_url" value="<?php echo esc_url($wordpress_url); ?>" class="large-text" placeholder="https://wordpress.org/plugins/your-plugin/">
+                    <p class="description">WordPress.org plugin/theme page (if applicable)</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <p style="background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin-top: 20px;">
+        <strong>💡 Quick Tips:</strong><br>
+        • Fields marked with * are required<br>
+        • For FREE products: Fill in "Download URL"<br>
+        • For PREMIUM products: Fill in "Price" and "Purchase URL"<br>
+        • Use the WordPress editor below to add detailed product description, features, and benefits
+    </p>
+    <?php
+}
+
+/**
+ * Save Product Meta Box Data
+ */
+function worzen_save_product_meta($post_id) {
+    // Check nonce
+    if (!isset($_POST['worzen_product_meta_nonce']) || !wp_verify_nonce($_POST['worzen_product_meta_nonce'], 'worzen_product_meta')) {
+        return;
+    }
+
+    // Check autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Check permissions
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // Save fields
+    $fields = array(
+        'product_tagline',
+        'product_price',
+        'product_type',
+        'product_category',
+        'product_demo_url',
+        'product_download_url',
+        'product_purchase_url',
+        'product_wordpress_url',
+        'product_rating',
+        'product_users',
+        'product_version'
+    );
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
+        }
+    }
+}
+add_action('save_post', 'worzen_save_product_meta');
