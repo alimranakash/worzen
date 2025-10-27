@@ -233,6 +233,15 @@ get_header();
     </div>
 </section>
 
+<section>
+  <?php
+  while ( have_posts() ) :
+      the_post();
+      the_content();
+  endwhile;
+  ?>
+</section>
+
 <?php
 get_footer();
 
