@@ -1,0 +1,266 @@
+/**
+ * Worzen Pricing Table Block - Frontend Styles
+ *
+ * @package Worzen
+ * @since 1.0.0
+ */
+
+/* ==========================================================================
+   Pricing Table Container
+   ========================================================================== */
+
+.worzen-pricing-table-block {
+    margin: 3rem 0;
+}
+
+.worzen-pricing-container {
+    position: relative;
+}
+
+/* ==========================================================================
+   Pricing Cards
+   ========================================================================== */
+
+.worzen-pricing-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.worzen-pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.worzen-pricing-card:hover::before {
+    opacity: 1;
+}
+
+/* Featured Card */
+.worzen-pricing-featured {
+    border-color: #6366f1;
+    box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 
+                0 10px 10px -5px rgba(99, 102, 241, 0.04);
+}
+
+.worzen-pricing-featured::before {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Pricing Button
+   ========================================================================== */
+
+.worzen-pricing-button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.worzen-pricing-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, #8b5cf6, #ec4899);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.worzen-pricing-button:hover::before {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .worzen-pricing-table-block {
+        margin: 2rem 0;
+    }
+    
+    .worzen-pricing-featured {
+        transform: none !important;
+        scale: 1 !important;
+    }
+    
+    .worzen-pricing-card:hover {
+        transform: translateY(-4px) !important;
+    }
+}
+
+/* ==========================================================================
+   Animation Enhancements
+   ========================================================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.worzen-pricing-card {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.worzen-pricing-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.worzen-pricing-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.worzen-pricing-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.worzen-pricing-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+/* ==========================================================================
+   Feature List Styling
+   ========================================================================== */
+
+.worzen-pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.worzen-pricing-card li {
+    transition: transform 0.2s ease;
+}
+
+.worzen-pricing-card li:hover {
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Price Display
+   ========================================================================== */
+
+.worzen-pricing-card .text-6xl {
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+/* Gradient text for price */
+.bg-gradient-to-r {
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-primary {
+    --tw-gradient-from: #6366f1;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(99, 102, 241, 0));
+}
+
+.to-secondary {
+    --tw-gradient-to: #8b5cf6;
+}
+
+.bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.text-transparent {
+    color: transparent;
+}
+
+/* ==========================================================================
+   Badge Styling
+   ========================================================================== */
+
+.worzen-pricing-featured > div:first-child span {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode Support (Optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+    .worzen-pricing-card {
+        background: #1f2937;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+    .worzen-pricing-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .worzen-pricing-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    .worzen-pricing-button {
+        border: 2px solid #6366f1;
+        color: #6366f1 !important;
+        background: transparent !important;
+    }
+}
+
+/* ==========================================================================
+   Accessibility Enhancements
+   ========================================================================== */
+
+.worzen-pricing-button:focus {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+}
+
+.worzen-pricing-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .worzen-pricing-card,
+    .worzen-pricing-button,
+    .worzen-pricing-card li {
+        animation: none;
+        transition: none;
+    }
+    
+    .worzen-pricing-card:hover {
+        transform: none;
+    }
+}
+

@@ -228,12 +228,14 @@ get_header();
 </section>
 
 <section>
-  <?php
-  while ( have_posts() ) :
-      the_post();
-      the_content();
-  endwhile;
-  ?>
+    <div class="container mx-auto px-6 text-center">
+      <?php
+      while ( have_posts() ) :
+          the_post();
+          the_content();
+      endwhile;
+      ?>
+    </div>
 </section>
 
 <?php

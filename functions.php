@@ -223,6 +223,75 @@ function worzen_block_editor_assets() {
 add_action('enqueue_block_editor_assets', 'worzen_block_editor_assets');
 
 /**
+ * Register Custom Block Categories
+ *
+ * Adds a custom "Worzen" category for custom blocks
+ */
+function worzen_block_categories($categories) {
+    return array_merge(
+        array(
+            array(
+                'slug'  => 'worzen',
+                'title' => __('Worzen', 'worzen'),
+                'icon'  => 'star-filled',
+            ),
+        ),
+        $categories
+    );
+}
+add_filter('block_categories_all', 'worzen_block_categories', 10, 2);
+
+/**
+ * Register Custom Gutenberg Blocks
+ *
+ * Registers all custom blocks for the Worzen theme
+ */
+function worzen_register_blocks() {
+    // Check if function exists (WordPress 5.8+)
+    if (!function_exists('register_block_type')) {
+        return;
+    }
+
+    // Register the block script with proper dependencies FIRST
+    wp_register_script(
+        'worzen-pricing-block-editor',
+        WORZEN_THEME_URI . '/blocks/pricing-table/block-editor.js',
+        array('wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor', 'wp-components'),
+        WORZEN_VERSION,
+        true // Load in footer
+    );
+
+    // Register Pricing Table Block using block.json
+    register_block_type(
+        WORZEN_THEME_DIR . '/blocks/pricing-table',
+        array(
+            'render_callback' => 'worzen_render_pricing_table_block',
+            'editor_script' => 'worzen-pricing-block-editor', // Use our registered script
+        )
+    );
+}
+add_action('init', 'worzen_register_blocks');
+
+/**
+ * Render callback for Pricing Table Block
+ *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ * @return string Block HTML output.
+ */
+function worzen_render_pricing_table_block($attributes, $content, $block) {
+    // Start output buffering
+    ob_start();
+
+    // Include the render template
+    include WORZEN_THEME_DIR . '/blocks/pricing-table/render.php';
+
+    // Return the buffered content
+    return ob_get_clean();
+}
+
+/**
  * Add Tailwind CSS Configuration
  *
  * Injects custom Tailwind configuration into the head
