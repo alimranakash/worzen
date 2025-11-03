@@ -187,7 +187,7 @@ if (!is_array($product_stats)) {
                 // Display the main content
                 if (get_the_content()) :
             ?>
-            <div class="prose prose-lg max-w-none mb-16">
+            <div class="entry-content prose prose-lg max-w-none mb-16">
                 <?php the_content(); ?>
             </div>
             <?php

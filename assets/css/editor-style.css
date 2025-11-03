@@ -1,0 +1,280 @@
+/**
+ * Gutenberg Editor Styles
+ * 
+ * This file contains styles for the Gutenberg block editor
+ * to match the frontend appearance.
+ * 
+ * @package Worzen
+ * @since 1.0.0
+ */
+
+/* ==========================================================================
+   Editor Typography
+   ========================================================================== */
+
+.editor-styles-wrapper {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1f2937;
+}
+
+/* ==========================================================================
+   Editor Color Palette
+   ========================================================================== */
+
+.editor-styles-wrapper {
+    --wp--preset--color--primary: #6366f1;
+    --wp--preset--color--secondary: #8b5cf6;
+    --wp--preset--color--accent: #ec4899;
+    --wp--preset--color--dark: #1f2937;
+    --wp--preset--color--light: #f9fafb;
+}
+
+/* ==========================================================================
+   Editor Headings
+   ========================================================================== */
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+}
+
+.editor-styles-wrapper h1 {
+    font-size: 2.5rem;
+}
+
+.editor-styles-wrapper h2 {
+    font-size: 2rem;
+}
+
+.editor-styles-wrapper h3 {
+    font-size: 1.75rem;
+}
+
+.editor-styles-wrapper h4 {
+    font-size: 1.5rem;
+}
+
+.editor-styles-wrapper h5 {
+    font-size: 1.25rem;
+}
+
+.editor-styles-wrapper h6 {
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   Editor Paragraphs
+   ========================================================================== */
+
+.editor-styles-wrapper p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+/* ==========================================================================
+   Editor Links
+   ========================================================================== */
+
+.editor-styles-wrapper a {
+    color: #6366f1;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.editor-styles-wrapper a:hover {
+    color: #8b5cf6;
+}
+
+/* ==========================================================================
+   Editor Lists
+   ========================================================================== */
+
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.editor-styles-wrapper li {
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+}
+
+/* ==========================================================================
+   Editor Blockquotes
+   ========================================================================== */
+
+.editor-styles-wrapper blockquote {
+    border-left: 4px solid #6366f1;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #4b5563;
+}
+
+/* ==========================================================================
+   Editor Code
+   ========================================================================== */
+
+.editor-styles-wrapper code {
+    background-color: #f3f4f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.875rem;
+}
+
+.editor-styles-wrapper pre {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+}
+
+.editor-styles-wrapper pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+/* ==========================================================================
+   Editor Tables
+   ========================================================================== */
+
+.editor-styles-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+.editor-styles-wrapper th,
+.editor-styles-wrapper td {
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.editor-styles-wrapper th {
+    background-color: #f9fafb;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   Editor Images
+   ========================================================================== */
+
+.editor-styles-wrapper img {
+    max-width: 100%;
+    height: auto;
+}
+
+.editor-styles-wrapper figure {
+    margin: 2rem 0;
+}
+
+.editor-styles-wrapper figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+}
+
+/* ==========================================================================
+   Editor Buttons
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block-button__link {
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.editor-styles-wrapper .wp-block-button__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
+/* ==========================================================================
+   Editor Separators
+   ========================================================================== */
+
+.editor-styles-wrapper hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 3rem auto;
+}
+
+/* ==========================================================================
+   Editor Columns
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block-columns {
+    display: flex;
+    gap: 2rem;
+}
+
+.editor-styles-wrapper .wp-block-column {
+    flex: 1;
+}
+
+/* ==========================================================================
+   Editor Cover Block
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block-cover {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.editor-styles-wrapper .wp-block-cover__inner-container {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Editor Group Block
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block-group {
+    margin: 2rem 0;
+}
+
+.editor-styles-wrapper .wp-block-group__inner-container {
+    padding: 2rem;
+}
+
+/* ==========================================================================
+   Editor Width Constraints
+   ========================================================================== */
+
+.editor-styles-wrapper .wp-block {
+    max-width: 800px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"] {
+    max-width: 1200px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="full"] {
+    max-width: none;
+}
+

@@ -77,7 +77,7 @@
 
                 <!-- CTA Button (Desktop) -->
                 <div class="hidden md:block">
-                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300">
+                    <a href="<?php echo esc_url(home_url('/help')); ?>" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300">
                         <?php esc_html_e('Get Started', 'worzen'); ?>
                     </a>
                 </div>
@@ -119,7 +119,7 @@
                 ?>
                 <!-- Mobile CTA Button -->
                 <div class="mt-4">
-                    <a href="<?php echo esc_url(home_url('/contact')); ?>" class="block text-center bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300">
+                    <a href="<?php echo esc_url(home_url('/help')); ?>" class="block text-center bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full hover:shadow-lg transition duration-300">
                         <?php esc_html_e('Get Started', 'worzen'); ?>
                     </a>
                 </div>

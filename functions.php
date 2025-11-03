@@ -23,36 +23,36 @@ define('WORZEN_THEME_URI', get_template_directory_uri());
 
 /**
  * Theme Setup
- * 
+ *
  * Registers theme support for various WordPress features
  */
 function worzen_theme_setup() {
-    
+
     // Make theme available for translation
     load_theme_textdomain('worzen', WORZEN_THEME_DIR . '/languages');
-    
+
     // Add default posts and comments RSS feed links to head
     add_theme_support('automatic-feed-links');
-    
+
     // Let WordPress manage the document title
     add_theme_support('title-tag');
-    
+
     // Enable support for Post Thumbnails on posts and pages
     add_theme_support('post-thumbnails');
-    
+
     // Set default thumbnail size
     set_post_thumbnail_size(1200, 630, true);
-    
+
     // Add additional image sizes
     add_image_size('worzen-featured', 800, 450, true);
     add_image_size('worzen-thumbnail', 400, 300, true);
-    
+
     // Register navigation menus
     register_nav_menus(array(
         'primary' => esc_html__('Primary Menu', 'worzen'),
         'footer'  => esc_html__('Footer Menu', 'worzen'),
     ));
-    
+
     // Switch default core markup to output valid HTML5
     add_theme_support('html5', array(
         'search-form',
@@ -63,7 +63,7 @@ function worzen_theme_setup() {
         'style',
         'script',
     ));
-    
+
     // Add theme support for custom logo
     add_theme_support('custom-logo', array(
         'height'      => 100,
@@ -71,15 +71,39 @@ function worzen_theme_setup() {
         'flex-height' => true,
         'flex-width'  => true,
     ));
-    
+
     // Add support for responsive embedded content
     add_theme_support('responsive-embeds');
-    
+
     // Add support for editor styles
     add_theme_support('editor-styles');
-    
+
     // Add support for wide alignment
     add_theme_support('align-wide');
+
+    // Add support for full alignment
+    add_theme_support('align-full');
+
+    // Add support for block styles
+    add_theme_support('wp-block-styles');
+
+    // Add support for custom line height
+    add_theme_support('custom-line-height');
+
+    // Add support for custom spacing
+    add_theme_support('custom-spacing');
+
+    // Add support for custom units
+    add_theme_support('custom-units');
+
+    // Add support for link color
+    add_theme_support('link-color');
+
+    // Add support for experimental appearance tools
+    add_theme_support('appearance-tools');
+
+    // Add support for border controls
+    add_theme_support('border');
 }
 add_action('after_setup_theme', 'worzen_theme_setup');
 
@@ -124,11 +148,30 @@ function worzen_enqueue_scripts() {
         WORZEN_VERSION
     );
 
+    // Enqueue WordPress block styles (for Gutenberg blocks)
+    wp_enqueue_style('wp-block-library');
+
+    // Enqueue WordPress block theme styles
+    wp_enqueue_style('wp-block-library-theme');
+
+    // Enqueue inline block styles (for dynamic block styles)
+    if (function_exists('wp_enqueue_block_style')) {
+        wp_enqueue_style('global-styles');
+    }
+
     // Enqueue custom CSS file (for any additional custom styles)
     wp_enqueue_style(
         'worzen-custom',
         WORZEN_THEME_URI . '/assets/css/custom.css',
-        array(),
+        array('wp-block-library', 'wp-block-library-theme'),
+        WORZEN_VERSION
+    );
+
+    // Enqueue Gutenberg block styles compatibility CSS
+    wp_enqueue_style(
+        'worzen-gutenberg',
+        WORZEN_THEME_URI . '/assets/css/gutenberg.css',
+        array('wp-block-library'),
         WORZEN_VERSION
     );
 
@@ -154,6 +197,30 @@ function worzen_enqueue_scripts() {
     ));
 }
 add_action('wp_enqueue_scripts', 'worzen_enqueue_scripts');
+
+/**
+ * Enqueue Block Editor Assets
+ *
+ * Loads styles for the Gutenberg block editor
+ */
+function worzen_block_editor_assets() {
+    // Enqueue editor styles
+    wp_enqueue_style(
+        'worzen-editor-styles',
+        WORZEN_THEME_URI . '/assets/css/editor-style.css',
+        array('wp-edit-blocks'),
+        WORZEN_VERSION
+    );
+
+    // Enqueue Google Fonts in editor
+    wp_enqueue_style(
+        'worzen-editor-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap',
+        array(),
+        null
+    );
+}
+add_action('enqueue_block_editor_assets', 'worzen_block_editor_assets');
 
 /**
  * Add Tailwind CSS Configuration

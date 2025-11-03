@@ -67,7 +67,7 @@ get_header();
             </header>
 
             <!-- Post Content -->
-            <div class="prose prose-lg max-w-none mb-12">
+            <div class="entry-content prose prose-lg max-w-none mb-12">
                 <?php
                 the_content();
 

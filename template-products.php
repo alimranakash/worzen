@@ -311,13 +311,19 @@ get_header();
     </div>
 </section>
 
-<section>
-  <?php
-  while ( have_posts() ) :
-      the_post();
-      the_content();
-  endwhile;
-  ?>
+<section class="py-12 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        ?>
+        <div class="entry-content prose prose-lg max-w-none">
+            <?php the_content(); ?>
+        </div>
+        <?php
+    endwhile;
+    ?>
+  </div>
 </section>
 
 <script>

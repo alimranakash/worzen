@@ -63,25 +63,6 @@ get_header();
                         </div>
                     </div>
 
-                    <!-- Support -->
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
-                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <h3 class="text-lg font-semibold text-gray-900">Support</h3>
-                            <p class="text-gray-600">
-                                <a href="https://wordpress.org/support/" target="_blank" class="hover:text-primary transition duration-300">
-                                    Visit Support Forum
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-
                     <!-- WordPress Profile -->
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
@@ -144,46 +125,45 @@ get_header();
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
                     
                     <?php
-                    // Check if Contact Form 7 shortcode exists
-                    if (shortcode_exists('contact-form-7')) {
-                        echo do_shortcode('[contact-form-7 id="1" title="Contact form 1"]');
+                    if (shortcode_exists('fluent_support_portal')) {
+                        echo do_shortcode('[fluent_support_portal]');
                     } else {
-                        // Fallback form if Contact Form 7 is not installed
-                    ?>
-                    
-                    <form class="space-y-6" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" id="worzen-contact-form">
-                        <input type="hidden" name="action" value="worzen_contact_form">
-                        <?php wp_nonce_field('worzen_contact_form', 'worzen_contact_nonce'); ?>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="contact_name" class="block text-sm font-semibold text-gray-700 mb-2">Your Name *</label>
-                                <input type="text" id="contact_name" name="contact_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="John Doe">
+                        ?>
+                        <!-- your fallback contact form -->
+                        <form class="space-y-6" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" id="worzen-contact-form">
+                            <input type="hidden" name="action" value="worzen_contact_form">
+                            <?php wp_nonce_field('worzen_contact_form', 'worzen_contact_nonce'); ?>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="contact_name" class="block text-sm font-semibold text-gray-700 mb-2">Your Name *</label>
+                                    <input type="text" id="contact_name" name="contact_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label for="contact_email" class="block text-sm font-semibold text-gray-700 mb-2">Your Email *</label>
+                                    <input type="email" id="contact_email" name="contact_email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="john@example.com">
+                                </div>
                             </div>
+                            
                             <div>
-                                <label for="contact_email" class="block text-sm font-semibold text-gray-700 mb-2">Your Email *</label>
-                                <input type="email" id="contact_email" name="contact_email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="john@example.com">
+                                <label for="contact_subject" class="block text-sm font-semibold text-gray-700 mb-2">Subject *</label>
+                                <input type="text" id="contact_subject" name="contact_subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="How can we help?">
                             </div>
-                        </div>
-                        
-                        <div>
-                            <label for="contact_subject" class="block text-sm font-semibold text-gray-700 mb-2">Subject *</label>
-                            <input type="text" id="contact_subject" name="contact_subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="How can we help?">
-                        </div>
-                        
-                        <div>
-                            <label for="contact_message" class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                            <textarea id="contact_message" name="contact_message" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="Tell us about your project or question..."></textarea>
-                        </div>
-                        
-                        <div>
-                            <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:-translate-y-1 transition duration-300">
-                                Send Message
-                            </button>
-                        </div>
-                    </form>
+                            
+                            <div>
+                                <label for="contact_message" class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
+                                <textarea id="contact_message" name="contact_message" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300" placeholder="Tell us about your project or question..."></textarea>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:-translate-y-1 transition duration-300">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                        <?php 
+                    } ?>
 
-                    <?php } ?>
 
                     <p class="text-sm text-gray-500 mt-6 text-center">
                         We typically respond within 24 hours during business days.
