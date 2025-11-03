@@ -731,3 +731,436 @@ function worzen_save_product_meta($post_id) {
     }
 }
 add_action('save_post', 'worzen_save_product_meta');
+
+/**
+ * ============================================================================
+ * CUSTOM POST TYPE: PRODUCTS
+ * ============================================================================
+ *
+ * Register custom post type for products with categories and featured meta
+ */
+
+/**
+ * Register Products Custom Post Type
+ */
+function worzen_register_products_post_type() {
+    $labels = array(
+        'name'                  => _x('Worzen Products', 'Post Type General Name', 'worzen'),
+        'singular_name'         => _x('Worzen Product', 'Post Type Singular Name', 'worzen'),
+        'menu_name'             => __('Worzen Products', 'worzen'),
+        'name_admin_bar'        => __('Worzen Product', 'worzen'),
+        'archives'              => __('Worzen Product Archives', 'worzen'),
+        'attributes'            => __('Worzen Product Attributes', 'worzen'),
+        'parent_item_colon'     => __('Parent Worzen Product:', 'worzen'),
+        'all_items'             => __('All Worzen Products', 'worzen'),
+        'add_new_item'          => __('Add New Worzen Product', 'worzen'),
+        'add_new'               => __('Add New', 'worzen'),
+        'new_item'              => __('New Worzen Product', 'worzen'),
+        'edit_item'             => __('Edit Worzen Product', 'worzen'),
+        'update_item'           => __('Update Worzen Product', 'worzen'),
+        'view_item'             => __('View Worzen Product', 'worzen'),
+        'view_items'            => __('View Worzen Products', 'worzen'),
+        'search_items'          => __('Search Worzen Product', 'worzen'),
+        'not_found'             => __('Not found', 'worzen'),
+        'not_found_in_trash'    => __('Not found in Trash', 'worzen'),
+        'featured_image'        => __('Product Image', 'worzen'),
+        'set_featured_image'    => __('Set product image', 'worzen'),
+        'remove_featured_image' => __('Remove product image', 'worzen'),
+        'use_featured_image'    => __('Use as product image', 'worzen'),
+        'insert_into_item'      => __('Insert into product', 'worzen'),
+        'uploaded_to_this_item' => __('Uploaded to this product', 'worzen'),
+        'items_list'            => __('Worzen Products list', 'worzen'),
+        'items_list_navigation' => __('Worzen Products list navigation', 'worzen'),
+        'filter_items_list'     => __('Filter worzen products list', 'worzen'),
+    );
+
+    $args = array(
+        'label'                 => __('Worzen Product', 'worzen'),
+        'description'           => __('Worzen Products for display on the website', 'worzen'),
+        'labels'                => $labels,
+        'supports'              => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+        'taxonomies'            => array('product_category'),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-products',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'post',
+        'show_in_rest'          => true,
+    );
+
+    register_post_type('worzen-product', $args);
+}
+add_action('init', 'worzen_register_products_post_type', 0);
+
+/**
+ * Register Product Categories Taxonomy
+ */
+function worzen_register_product_categories() {
+    $labels = array(
+        'name'                       => _x('Product Categories', 'Taxonomy General Name', 'worzen'),
+        'singular_name'              => _x('Product Category', 'Taxonomy Singular Name', 'worzen'),
+        'menu_name'                  => __('Categories', 'worzen'),
+        'all_items'                  => __('All Categories', 'worzen'),
+        'parent_item'                => __('Parent Category', 'worzen'),
+        'parent_item_colon'          => __('Parent Category:', 'worzen'),
+        'new_item_name'              => __('New Category Name', 'worzen'),
+        'add_new_item'               => __('Add New Category', 'worzen'),
+        'edit_item'                  => __('Edit Category', 'worzen'),
+        'update_item'                => __('Update Category', 'worzen'),
+        'view_item'                  => __('View Category', 'worzen'),
+        'separate_items_with_commas' => __('Separate categories with commas', 'worzen'),
+        'add_or_remove_items'        => __('Add or remove categories', 'worzen'),
+        'choose_from_most_used'      => __('Choose from the most used', 'worzen'),
+        'popular_items'              => __('Popular Categories', 'worzen'),
+        'search_items'               => __('Search Categories', 'worzen'),
+        'not_found'                  => __('Not Found', 'worzen'),
+        'no_terms'                   => __('No categories', 'worzen'),
+        'items_list'                 => __('Categories list', 'worzen'),
+        'items_list_navigation'      => __('Categories list navigation', 'worzen'),
+    );
+
+    $args = array(
+        'labels'                     => $labels,
+        'hierarchical'               => true,
+        'public'                     => true,
+        'show_ui'                    => true,
+        'show_admin_column'          => true,
+        'show_in_nav_menus'          => true,
+        'show_tagcloud'              => false,
+        'show_in_rest'               => true,
+    );
+
+    register_taxonomy('product_category', array('worzen-product'), $args);
+}
+add_action('init', 'worzen_register_product_categories', 0);
+
+/**
+ * Add Product Meta Boxes for Custom Post Type
+ */
+function worzen_add_product_cpt_meta_boxes() {
+    add_meta_box(
+        'product_cpt_details',
+        'Product Details',
+        'worzen_product_cpt_details_callback',
+        'worzen-product',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'worzen_add_product_cpt_meta_boxes');
+
+/**
+ * Product CPT Meta Box Callback
+ */
+function worzen_product_cpt_details_callback($post) {
+    // Add nonce for security
+    wp_nonce_field('worzen_product_cpt_meta', 'worzen_product_cpt_meta_nonce');
+
+    // Get existing values
+    $price = get_post_meta($post->ID, '_product_price', true);
+    $rating = get_post_meta($post->ID, '_product_rating', true);
+    $users = get_post_meta($post->ID, '_product_users', true);
+    $badges = get_post_meta($post->ID, '_product_badges', true);
+    if (!is_array($badges)) {
+        $badges = array();
+    }
+    $featured = get_post_meta($post->ID, '_product_featured', true);
+    $product_url = get_post_meta($post->ID, '_product_url', true);
+    $url_new_tab = get_post_meta($post->ID, '_product_url_new_tab', true);
+    $product_icon = get_post_meta($post->ID, '_product_icon', true);
+    ?>
+
+    <style>
+        .worzen-product-cpt-meta-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .worzen-product-cpt-meta-table th {
+            width: 200px;
+            text-align: left;
+            padding: 15px 10px;
+            font-weight: 600;
+            vertical-align: top;
+        }
+        .worzen-product-cpt-meta-table td {
+            padding: 15px 10px;
+        }
+        .worzen-product-cpt-meta-table input[type="text"],
+        .worzen-product-cpt-meta-table input[type="url"],
+        .worzen-product-cpt-meta-table input[type="number"] {
+            width: 100%;
+            max-width: 600px;
+        }
+        .worzen-product-cpt-meta-table .description {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .worzen-meta-section-cpt {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #6366f1;
+        }
+        .worzen-meta-section-cpt h4 {
+            margin: 0 0 10px 0;
+            color: #6366f1;
+        }
+        .featured-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    </style>
+
+    <div class="worzen-meta-section-cpt">
+        <h4>⭐ Featured Product</h4>
+        <table class="worzen-product-cpt-meta-table">
+            <tr>
+                <th><label for="product_featured">Show on Homepage</label></th>
+                <td>
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" id="product_featured" name="product_featured" value="1" class="featured-checkbox" <?php checked($featured, '1'); ?>>
+                        <span>Mark this product as featured (will appear in "Our Premium Products" section on homepage)</span>
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="worzen-meta-section-cpt">
+        <h4>💰 Pricing & Badges</h4>
+        <table class="worzen-product-cpt-meta-table">
+            <tr>
+                <th><label for="product_price">Price</label></th>
+                <td>
+                    <input type="text" id="product_price" name="product_price" value="<?php echo esc_attr($price); ?>" placeholder="59 or Free" style="width: 150px;">
+                    <p class="description">Enter price (e.g., "59" for $59) or "Free" for free products</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Badges</label></th>
+                <td>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <?php
+                        $available_badges = array('Premium', 'Free', 'New', 'Popular');
+                        foreach ($available_badges as $badge_option) :
+                            $checked = in_array($badge_option, $badges) ? 'checked' : '';
+                        ?>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" name="product_badges[]" value="<?php echo esc_attr($badge_option); ?>" <?php echo $checked; ?>>
+                                <span><?php echo esc_html($badge_option); ?></span>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                    <p class="description">Select one or more badges to display on product card (optional)</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="worzen-meta-section-cpt">
+        <h4>📊 Product Stats</h4>
+        <table class="worzen-product-cpt-meta-table">
+            <tr>
+                <th><label for="product_rating">Rating</label></th>
+                <td>
+                    <input type="number" id="product_rating" name="product_rating" value="<?php echo esc_attr($rating); ?>" placeholder="4.9" step="0.1" min="0" max="5" style="width: 100px;">
+                    <p class="description">Star rating (0-5, e.g., 4.9)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_users">Active Users</label></th>
+                <td>
+                    <input type="text" id="product_users" name="product_users" value="<?php echo esc_attr($users); ?>" placeholder="5,000+" style="width: 150px;">
+                    <p class="description">Number of active users (e.g., "5,000+")</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="worzen-meta-section-cpt">
+        <h4>🎨 Product Icon</h4>
+        <table class="worzen-product-cpt-meta-table">
+            <tr>
+                <th><label for="product_icon">SVG Icon Code</label></th>
+                <td>
+                    <textarea id="product_icon" name="product_icon" rows="6" class="large-text code" placeholder='<svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">&#10;    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M..."/>&#10;</svg>'><?php echo esc_textarea($product_icon); ?></textarea>
+                    <p class="description">Paste SVG icon code here (displayed on homepage when no featured image is set). Get free icons from <a href="https://heroicons.com/" target="_blank">Heroicons</a> or <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+                    <?php if (!empty($product_icon)) : ?>
+                        <div style="margin-top: 10px; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;">
+                            <div style="color: white;">
+                                <?php echo $product_icon; // Output the SVG for preview ?>
+                            </div>
+                        </div>
+                        <p class="description" style="margin-top: 5px;"><em>Preview of your icon above</em></p>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="worzen-meta-section-cpt">
+        <h4>🔗 Product URL</h4>
+        <table class="worzen-product-cpt-meta-table">
+            <tr>
+                <th><label for="product_url">View Details URL</label></th>
+                <td>
+                    <input type="url" id="product_url" name="product_url" value="<?php echo esc_url($product_url); ?>" class="large-text" placeholder="https://example.com/product">
+                    <p class="description">URL for "View Details" button (optional - leave empty for # link)</p>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="product_url_new_tab">Open in New Tab</label></th>
+                <td>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="product_url_new_tab" name="product_url_new_tab" value="1" <?php checked($url_new_tab, '1'); ?>>
+                        <span>Open link in new tab (target="_blank")</span>
+                    </label>
+                    <p class="description">Check this to open the URL in a new browser tab</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <p style="background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin-top: 20px;">
+        <strong>💡 Quick Tips:</strong><br>
+        • Set a <strong>Featured Image</strong> for the product (recommended size: 800x600px)<br>
+        • Add a custom <strong>SVG Icon</strong> to display on homepage when no featured image is set<br>
+        • Assign <strong>Product Categories</strong> in the right sidebar for filtering<br>
+        • Use the <strong>Excerpt</strong> field for the product description shown on cards<br>
+        • Check <strong>"Show on Homepage"</strong> to feature this product on the homepage<br>
+        • The main content editor can be used for detailed product information
+    </p>
+    <?php
+}
+
+/**
+ * Save Product CPT Meta Box Data
+ */
+function worzen_save_product_cpt_meta($post_id) {
+    // Check nonce
+    if (!isset($_POST['worzen_product_cpt_meta_nonce']) || !wp_verify_nonce($_POST['worzen_product_cpt_meta_nonce'], 'worzen_product_cpt_meta')) {
+        return;
+    }
+
+    // Check autosave
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Check permissions
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // Save fields
+    $fields = array(
+        'product_price' => '_product_price',
+        'product_rating' => '_product_rating',
+        'product_users' => '_product_users',
+        'product_url' => '_product_url',
+    );
+
+    foreach ($fields as $field => $meta_key) {
+        if (isset($_POST[$field])) {
+            update_post_meta($post_id, $meta_key, sanitize_text_field($_POST[$field]));
+        }
+    }
+
+    // Handle badges (multiple checkboxes)
+    if (isset($_POST['product_badges']) && is_array($_POST['product_badges'])) {
+        $badges = array_map('sanitize_text_field', $_POST['product_badges']);
+        update_post_meta($post_id, '_product_badges', $badges);
+    } else {
+        // If no badges selected, save empty array
+        update_post_meta($post_id, '_product_badges', array());
+    }
+
+    // Handle product icon (SVG code)
+    if (isset($_POST['product_icon'])) {
+        // Allow SVG tags and attributes
+        $allowed_svg_tags = array(
+            'svg' => array(
+                'class' => array(),
+                'aria-hidden' => array(),
+                'aria-labelledby' => array(),
+                'role' => array(),
+                'xmlns' => array(),
+                'width' => array(),
+                'height' => array(),
+                'viewbox' => array(),
+                'viewBox' => array(),
+                'fill' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+            ),
+            'g' => array('fill' => array()),
+            'title' => array('title' => array()),
+            'path' => array(
+                'd' => array(),
+                'fill' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+                'stroke-linecap' => array(),
+                'stroke-linejoin' => array(),
+            ),
+            'circle' => array(
+                'cx' => array(),
+                'cy' => array(),
+                'r' => array(),
+                'fill' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+            ),
+            'rect' => array(
+                'x' => array(),
+                'y' => array(),
+                'width' => array(),
+                'height' => array(),
+                'fill' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+            ),
+            'line' => array(
+                'x1' => array(),
+                'y1' => array(),
+                'x2' => array(),
+                'y2' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+            ),
+            'polygon' => array(
+                'points' => array(),
+                'fill' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+            ),
+            'polyline' => array(
+                'points' => array(),
+                'fill' => array(),
+                'stroke' => array(),
+                'stroke-width' => array(),
+            ),
+        );
+        $icon_svg = wp_kses($_POST['product_icon'], $allowed_svg_tags);
+        update_post_meta($post_id, '_product_icon', $icon_svg);
+    }
+
+    // Handle featured checkbox
+    $featured = isset($_POST['product_featured']) ? '1' : '0';
+    update_post_meta($post_id, '_product_featured', $featured);
+
+    // Handle URL new tab checkbox
+    $url_new_tab = isset($_POST['product_url_new_tab']) ? '1' : '0';
+    update_post_meta($post_id, '_product_url_new_tab', $url_new_tab);
+}
+add_action('save_post_worzen-product', 'worzen_save_product_cpt_meta');

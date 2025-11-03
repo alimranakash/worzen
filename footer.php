@@ -117,8 +117,7 @@
                     <?php else : ?>
                         <h4 class="text-lg font-semibold text-white mb-4"><?php esc_html_e('Support', 'worzen'); ?></h4>
                         <ul class="space-y-2">
-                            <li><a href="https://wordpress.org/support/" target="_blank" class="hover:text-white transition duration-300"><?php esc_html_e('Documentation', 'worzen'); ?></a></li>
-                            <li><a href="https://wordpress.org/support/" target="_blank" class="hover:text-white transition duration-300"><?php esc_html_e('Support Forum', 'worzen'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/docs')); ?>" target="_blank" class="hover:text-white transition duration-300"><?php esc_html_e('Documentation', 'worzen'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/contact')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Contact Support', 'worzen'); ?></a></li>
                             <li><a href="<?php echo esc_url(home_url('/privacy-policy')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Privacy Policy', 'worzen'); ?></a></li>
                         </ul>
@@ -133,19 +132,9 @@
                     <?php
                     printf(
                         /* translators: 1: Copyright symbol and year, 2: Site name */
-                        esc_html__('%1$s %2$s. All rights reserved. Built with passion for the WordPress community.', 'worzen'),
+                        esc_html__('%1$s %2$s. All rights reserved.', 'worzen'),
                         '&copy; ' . date('Y'),
                         '<strong>' . get_bloginfo('name') . '</strong>'
-                    );
-                    ?>
-                </p>
-                <p class="text-gray-500 text-sm mt-2">
-                    <?php
-                    printf(
-                        /* translators: 1: Theme name, 2: Theme author */
-                        esc_html__('Theme: %1$s by %2$s', 'worzen'),
-                        'Worzen',
-                        '<a href="https://profiles.wordpress.org/al-imran-akash/" target="_blank" class="hover:text-white transition duration-300">Al Imran Akash</a>'
                     );
                     ?>
                 </p>

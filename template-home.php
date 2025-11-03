@@ -47,105 +47,88 @@ get_header();
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Product Card 1 -->
+
+            <?php
+            // Query for featured products
+            $featured_products = new WP_Query(array(
+                'post_type' => 'worzen-product',
+                'posts_per_page' => -1,
+                'meta_key' => '_product_featured',
+                'meta_value' => '1',
+                'orderby' => 'date',
+                'order' => 'DESC',
+            ));
+
+            // Define gradient color combinations for cards
+            $gradient_colors = array(
+                array('from' => 'indigo-400', 'to' => 'purple-500'),
+                array('from' => 'blue-400', 'to' => 'cyan-500'),
+                array('from' => 'green-400', 'to' => 'emerald-500'),
+                array('from' => 'orange-400', 'to' => 'red-500'),
+                array('from' => 'pink-400', 'to' => 'rose-500'),
+                array('from' => 'yellow-400', 'to' => 'amber-500'),
+                array('from' => 'violet-400', 'to' => 'purple-500'),
+                array('from' => 'teal-400', 'to' => 'cyan-500'),
+            );
+
+            if ($featured_products->have_posts()) :
+                $color_index = 0;
+                while ($featured_products->have_posts()) : $featured_products->the_post();
+                    // Get product meta data
+                    $product_url = get_post_meta(get_the_ID(), '_product_url', true);
+                    $url_new_tab = get_post_meta(get_the_ID(), '_product_url_new_tab', true);
+                    $product_icon = get_post_meta(get_the_ID(), '_product_icon', true);
+
+                    // Get current gradient colors
+                    $gradient = $gradient_colors[$color_index % count($gradient_colors)];
+                    $color_index++;
+
+                    // Get featured image or use placeholder
+                    $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+
+                    // Determine target attribute
+                    $target_attr = ($url_new_tab === '1') ? ' target="_blank" rel="noopener noreferrer"' : '';
+            ?>
+
+            <!-- Product Card -->
             <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group">
-                <div class="h-48 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                </div>
+                <?php if ($thumbnail_url) : ?>
+                    <div class="h-48 overflow-hidden">
+                        <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                <?php else : ?>
+                    <div class="h-48 bg-gradient-to-br from-<?php echo esc_attr($gradient['from']); ?> to-<?php echo esc_attr($gradient['to']); ?> flex items-center justify-center">
+                        <?php if (!empty($product_icon)) : ?>
+                            <?php echo $product_icon; // Output custom SVG icon ?>
+                        <?php else : ?>
+                            <!-- Default fallback icon -->
+                            <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
                 <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Checkout Manager for WooCommerce</h3>
-                    <p class="text-gray-600 mb-4">Customize your WooCommerce checkout page with ease. Add, remove, or modify fields to create the perfect checkout experience.</p>
-                    <a href="https://wordpress.org/plugins/checkout-manager-for-woocommerce/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3"><?php the_title(); ?></h3>
+                    <p class="text-gray-600 mb-4"><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
+                    <?php if ($product_url) : ?>
+                        <a href="<?php echo esc_url($product_url); ?>"<?php echo $target_attr; ?> class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
+                    <?php else : ?>
+                        <a href="<?php the_permalink(); ?>"<?php echo $target_attr; ?> class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <!-- Product Card 2 -->
-            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group">
-                <div class="h-48 bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
-                    </svg>
+            <?php
+                endwhile;
+                wp_reset_postdata();
+            else :
+            ?>
+                <!-- No Featured Products Message -->
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-500 text-lg">No featured products available at the moment.</p>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Custom Login Logo and URL</h3>
-                    <p class="text-gray-600 mb-4">Personalize your WordPress login page with custom branding. Change the logo, URL, and create a professional first impression.</p>
-                    <a href="https://wordpress.org/plugins/custom-login-logo-and-url/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
-                </div>
-            </div>
-
-            <!-- Product Card 3 -->
-            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group">
-                <div class="h-48 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Instant Page Load</h3>
-                    <p class="text-gray-600 mb-4">Dramatically improve your website speed with intelligent caching and optimization. Lightning-fast page loads guaranteed.</p>
-                    <a href="https://wordpress.org/plugins/instant-page-load/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
-                </div>
-            </div>
-
-            <!-- Product Card 4 -->
-            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group">
-                <div class="h-48 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Product View Count</h3>
-                    <p class="text-gray-600 mb-4">Track and display product view counts to build social proof and understand customer behavior on your WooCommerce store.</p>
-                    <a href="https://wordpress.org/plugins/product-view-count/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
-                </div>
-            </div>
-
-            <!-- Product Card 5 -->
-            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group">
-                <div class="h-48 bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Suffix Master</h3>
-                    <p class="text-gray-600 mb-4">Smart title, price & content branding tool. Add custom suffixes and prefixes to enhance your product presentation and SEO.</p>
-                    <a href="https://wordpress.org/plugins/suffix-master/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
-                </div>
-            </div>
-
-            <!-- Product Card 6 -->
-            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group">
-                <div class="h-48 bg-gradient-to-br from-yellow-400 to-amber-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">DeleteBulk</h3>
-                    <p class="text-gray-600 mb-4">Smart bulk delete & cleanup tool. Efficiently manage and clean your WordPress database with powerful filtering options.</p>
-                    <a href="https://wordpress.org/plugins/deletebulk/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
-                </div>
-            </div>
-
-            <!-- Product Card 7 -->
-            <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 overflow-hidden group md:col-span-2 lg:col-span-1">
-                <div class="h-48 bg-gradient-to-br from-violet-400 to-purple-500 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"></path>
-                    </svg>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Universal Blocks</h3>
-                    <p class="text-gray-600 mb-4">Drag & drop page builder blocks and patterns for Gutenberg. Create stunning pages with pre-designed blocks and layouts.</p>
-                    <a href="https://wordpress.org/plugins/universal-blocks/" target="_blank" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Learn More →</a>
-                </div>
-            </div>
+            <?php endif; ?>
 
         </div>
     </div>

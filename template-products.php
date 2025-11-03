@@ -52,18 +52,23 @@ get_header();
             <button class="filter-btn active px-6 py-2 rounded-full bg-primary text-white font-semibold hover:bg-secondary transition duration-300" data-filter="all">
                 All Products
             </button>
-            <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 font-semibold hover:bg-primary hover:text-white transition duration-300 border border-gray-300" data-filter="themes">
-                Themes
-            </button>
-            <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 font-semibold hover:bg-primary hover:text-white transition duration-300 border border-gray-300" data-filter="plugins">
-                Plugins
-            </button>
-            <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 font-semibold hover:bg-primary hover:text-white transition duration-300 border border-gray-300" data-filter="free">
-                Free
-            </button>
-            <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 font-semibold hover:bg-primary hover:text-white transition duration-300 border border-gray-300" data-filter="premium">
-                Premium
-            </button>
+            <?php
+            // Get all product categories
+            $categories = get_terms(array(
+                'taxonomy' => 'product_category',
+                'hide_empty' => true,
+            ));
+
+            if (!empty($categories) && !is_wp_error($categories)) {
+                foreach ($categories as $category) {
+                    ?>
+                    <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-700 font-semibold hover:bg-primary hover:text-white transition duration-300 border border-gray-300" data-filter="<?php echo esc_attr($category->slug); ?>">
+                        <?php echo esc_html($category->name); ?>
+                    </button>
+                    <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </section>
@@ -72,350 +77,152 @@ get_header();
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4">
         <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Product Card 1 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="themes premium">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-1.jpg" alt="Premium Theme" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%236366f1%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3EElegant Pro%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-primary bg-indigo-50 px-3 py-1 rounded-full">Theme</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">4.9</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Elegant Pro</h3>
-                    <p class="text-gray-600 mb-4">A stunning multipurpose WordPress theme with advanced customization options and premium features.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-primary">$59</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            5,000+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="#" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Product Card 2 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins free">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-2.jpg" alt="SEO Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%238b5cf6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3ESEO Optimizer%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Free</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">4.8</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">SEO Optimizer</h3>
-                    <p class="text-gray-600 mb-4">Boost your website's search engine rankings with our powerful and easy-to-use SEO plugin.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-green-600">Free</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            10,000+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="#" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <?php
+            // Function to get badge color (defined once outside the loop)
+            if (!function_exists('worzen_get_badge_color')) {
+                function worzen_get_badge_color($badge) {
+                    $colors = array(
+                        'Premium' => 'bg-accent',
+                        'Free' => 'bg-green-500',
+                        'New' => 'bg-blue-500',
+                        'Popular' => 'bg-orange-500',
+                    );
+                    return isset($colors[$badge]) ? $colors[$badge] : 'bg-accent';
+                }
+            }
 
-            <!-- Product Card 3 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="themes premium">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-3.jpg" alt="Business Theme" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%23ec4899%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3EBusiness Pro%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-primary bg-indigo-50 px-3 py-1 rounded-full">Theme</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">5.0</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Business Pro</h3>
-                    <p class="text-gray-600 mb-4">Professional business theme perfect for corporate websites, agencies, and startups.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-primary">$79</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            3,500+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="#" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            // Query all products
+            $products_query = new WP_Query(array(
+                'post_type' => 'worzen-product',
+                'posts_per_page' => -1,
+                'orderby' => 'date',
+                'order' => 'DESC',
+            ));
 
-            <!-- Product Card 4 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins premium">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-4.jpg" alt="Form Builder" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%236366f1%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3EForm Builder Pro%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">4.9</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Form Builder Pro</h3>
-                    <p class="text-gray-600 mb-4">Create beautiful, responsive forms with drag-and-drop ease. No coding required.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-primary">$49</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            7,500+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="#" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            if ($products_query->have_posts()) :
+                while ($products_query->have_posts()) : $products_query->the_post();
 
-            <!-- Product Card 5 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="themes free">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-5.jpg" alt="Minimal Theme" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%238b5cf6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3EMinimal Lite%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Free</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-primary bg-indigo-50 px-3 py-1 rounded-full">Theme</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">4.7</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Minimal Lite</h3>
-                    <p class="text-gray-600 mb-4">Clean and minimalist WordPress theme perfect for blogs and personal websites.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-green-600">Free</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            15,000+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="#" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    // Get product meta
+                    $price = get_post_meta(get_the_ID(), '_product_price', true);
+                    $rating = get_post_meta(get_the_ID(), '_product_rating', true);
+                    $users = get_post_meta(get_the_ID(), '_product_users', true);
+                    $badges = get_post_meta(get_the_ID(), '_product_badges', true);
+                    if (!is_array($badges)) {
+                        $badges = array();
+                    }
+                    $product_url = get_post_meta(get_the_ID(), '_product_url', true);
+                    $url_new_tab = get_post_meta(get_the_ID(), '_product_url_new_tab', true);
 
-            <!-- Product Card 6: DeleteBulk -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins free">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/deletebulk.jpg" alt="DeleteBulk Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%236366f1%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3EDeleteBulk%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Free</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">5.0</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">DeleteBulk</h3>
-                    <p class="text-gray-600 mb-4">Clean up your WordPress site in minutes. Bulk delete posts, pages, comments, and more with advanced filtering options.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-green-600">Free</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            500+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="<?php echo esc_url(home_url('/deletebulk')); ?>" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="https://wordpress.org/plugins/deletebulk/" target="_blank" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    // Get product categories
+                    $categories = get_the_terms(get_the_ID(), 'product_category');
+                    $category_slugs = array();
+                    $category_name = '';
 
-            <!-- Product Card 7: Product View Count -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins free">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/product-view-count.jpg" alt="Product View Count Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%238b5cf6%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2240%22 fill=%22%23ffffff%22%3EProduct View Count%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Free</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">4.8</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Product View Count</h3>
-                    <p class="text-gray-600 mb-4">Track WooCommerce product views with real-time analytics, bot detection, and comprehensive reporting dashboard.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-green-600">Free</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            200+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="<?php echo esc_url(home_url('/product-view-count')); ?>" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="https://wordpress.org/plugins/product-view-count/" target="_blank" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                    if ($categories && !is_wp_error($categories)) {
+                        foreach ($categories as $category) {
+                            $category_slugs[] = $category->slug;
+                        }
+                        $category_name = $categories[0]->name;
+                    }
 
-            <!-- Product Card 8: Suffix Master -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="plugins premium">
-                <div class="relative overflow-hidden group">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/suffix-master.jpg" alt="Suffix Master Plugin" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect width=%22800%22 height=%22600%22 fill=%22%23ec4899%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-size=%2248%22 fill=%22%23ffffff%22%3ESuffix Master%3C/text%3E%3C/svg%3E'">
-                    <div class="absolute top-4 right-4">
-                        <span class="bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold">Premium</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-sm font-semibold text-secondary bg-purple-50 px-3 py-1 rounded-full">Plugin</span>
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                            </svg>
-                            <span class="ml-1 text-gray-600 text-sm">5.0</span>
+                    $data_category = implode(' ', $category_slugs);
+
+                    // Get featured image
+                    $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+                    if (!$thumbnail_url) {
+                        $thumbnail_url = get_template_directory_uri() . '/assets/images/placeholder.jpg';
+                    }
+
+                    // Determine category badge color
+                    $cat_badge_color = 'bg-indigo-50 text-primary';
+                    if (in_array('plugin', $category_slugs) || in_array('plugins', $category_slugs)) {
+                        $cat_badge_color = 'bg-purple-50 text-secondary';
+                    }
+
+                    // Determine price display
+                    $price_display = '';
+                    $price_color = 'text-primary';
+                    if (strtolower($price) === 'free' || empty($price)) {
+                        $price_display = 'Free';
+                        $price_color = 'text-green-600';
+                    } else {
+                        $price_display = '$' . $price;
+                    }
+
+                    // Get excerpt or generate one
+                    $excerpt = get_the_excerpt();
+                    if (empty($excerpt)) {
+                        $excerpt = wp_trim_words(get_the_content(), 20, '...');
+                    }
+
+                    // Product URL
+                    $view_url = !empty($product_url) ? esc_url($product_url) : get_permalink();
+                    $target_attr = ($url_new_tab === '1') ? ' target="_blank" rel="noopener noreferrer"' : '';
+                    ?>
+
+                    <!-- Product Card -->
+                    <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2" data-category="<?php echo esc_attr($data_category); ?>">
+                        <div class="relative overflow-hidden group">
+                            <img src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+                            <?php if (!empty($badges)) : ?>
+                            <div class="absolute top-4 right-4 flex flex-col gap-2">
+                                <?php foreach ($badges as $badge) : ?>
+                                    <span class="<?php echo esc_attr(worzen_get_badge_color($badge)); ?> text-white px-3 py-1 rounded-full text-sm font-semibold"><?php echo esc_html($badge); ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <?php if (!empty($category_name)) : ?>
+                                <span class="text-sm font-semibold <?php echo esc_attr($cat_badge_color); ?> px-3 py-1 rounded-full"><?php echo esc_html($category_name); ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($rating)) : ?>
+                                <div class="flex items-center text-yellow-400">
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                                    </svg>
+                                    <span class="ml-1 text-gray-600 text-sm"><?php echo esc_html($rating); ?></span>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2"><?php the_title(); ?></h3>
+                            <p class="text-gray-600 mb-4"><?php echo esc_html($excerpt); ?></p>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-3xl font-bold <?php echo esc_attr($price_color); ?>"><?php echo esc_html($price_display); ?></div>
+                                <?php if (!empty($users)) : ?>
+                                <div class="text-sm text-gray-500">
+                                    <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                                    </svg>
+                                    <?php echo esc_html($users); ?> users
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="<?php echo esc_url($view_url); ?>"<?php echo $target_attr; ?> class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
+                                    View Details
+                                </a>
+                                <a href="<?php echo esc_url($view_url); ?>"<?php echo $target_attr; ?> class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Suffix Master Pro</h3>
-                    <p class="text-gray-600 mb-4">Smart title, price & content branding for WordPress. Add custom suffixes to product titles, prices, and content automatically.</p>
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl font-bold text-primary">$39</div>
-                        <div class="text-sm text-gray-500">
-                            <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-                            </svg>
-                            1,500+ users
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <a href="<?php echo esc_url(home_url('/suffix-master')); ?>" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-3 rounded-lg font-semibold hover:shadow-lg transition duration-300">
-                            View Details
-                        </a>
-                        <a href="#" class="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition duration-300">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                        </a>
-                    </div>
+
+                <?php
+                endwhile;
+                wp_reset_postdata();
+            else :
+                ?>
+                <div class="col-span-full text-center py-20">
+                    <p class="text-gray-500 text-lg">No products found. Please add some products from the admin panel.</p>
                 </div>
-            </div>
+            <?php endif; ?>
 
         </div>
 
