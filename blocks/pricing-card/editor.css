@@ -1,0 +1,41 @@
+/**
+ * Worzen Pricing Card - Editor Styles
+ *
+ * @package Worzen
+ * @since 2.0.0
+ */
+
+.worzen-pricing-card-editor {
+    position: relative;
+    min-height: 500px;
+}
+
+.worzen-pricing-card-editor .pricing-card-preview {
+    background-color: #ffffff;
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.worzen-pricing-card-editor .pricing-card-preview.featured {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 2px solid #6366f1;
+}
+
+/* Selected state */
+.worzen-pricing-card-editor.is-selected .pricing-card-preview {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+}
+
+/* Hover state */
+.worzen-pricing-card-editor:hover .pricing-card-preview {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+}
+

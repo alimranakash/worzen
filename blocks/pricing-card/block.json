@@ -1,0 +1,97 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "worzen/pricing-card",
+  "title": "Worzen Pricing Card",
+  "category": "worzen",
+  "description": "A beautiful pricing card for displaying pricing plans. Works great inside WordPress Columns.",
+  "keywords": ["pricing", "price", "plan", "card", "worzen"],
+  "version": "1.0.0",
+  "textdomain": "worzen",
+  "icon": "money-alt",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": false,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "planName": {
+      "type": "string",
+      "default": "Professional"
+    },
+    "price": {
+      "type": "string",
+      "default": "29"
+    },
+    "currency": {
+      "type": "string",
+      "default": "$"
+    },
+    "period": {
+      "type": "string",
+      "default": "per month"
+    },
+    "description": {
+      "type": "string",
+      "default": "Perfect for growing businesses"
+    },
+    "features": {
+      "type": "array",
+      "default": [
+        { "text": "Up to 10 users", "included": true },
+        { "text": "100GB storage", "included": true },
+        { "text": "Priority support", "included": true },
+        { "text": "Advanced analytics", "included": true },
+        { "text": "Custom integrations", "included": false }
+      ]
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Get Started"
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": "#"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "badge": {
+      "type": "string",
+      "default": "Most Popular"
+    },
+    "showBadge": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": true
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#1f2937"
+    },
+    "buttonColor": {
+      "type": "string",
+      "default": "#6366f1"
+    }
+  },
+  "example": {
+    "attributes": {
+      "planName": "Professional",
+      "price": "29",
+      "featured": true
+    }
+  }
+}
+

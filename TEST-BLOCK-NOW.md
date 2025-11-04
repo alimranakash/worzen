@@ -67,7 +67,7 @@ Look for an object with `slug: 'worzen'`. If you don't see it, the category isn'
 ### Verify Block is Registered
 In the console, type this and press Enter:
 ```javascript
-wp.blocks.getBlockTypes().find(b => b.name === 'worzen/pricing-table')
+wp.blocks.getBlockTypes().find(b => b.name === 'worzen/pricing-card')
 ```
 
 If it returns an object, the block IS registered. If it returns `undefined`, the block is NOT registered.
@@ -87,10 +87,10 @@ If it returns an object, the block IS registered. If it returns `undefined`, the
 
 ## 📁 FILES CHANGED:
 
-- `functions.php` - Simplified block registration
-- `blocks/pricing-table/block.json` - Updated to use block-simple.js
-- `blocks/pricing-table/block-simple.js` - NEW simple version without JSX
-- `blocks/pricing-table/block.js` - OLD version (not used anymore)
+- `functions.php` - Registers pricing-card block
+- `blocks/pricing-card/block.json` - Block metadata
+- `blocks/pricing-card/block.js` - Editor JavaScript with inline editing
+- `blocks/pricing-card/render.php` - Server-side rendering
 
 ---
 

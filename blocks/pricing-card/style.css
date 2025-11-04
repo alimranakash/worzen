@@ -1,0 +1,180 @@
+/**
+ * Worzen Pricing Card - Frontend Styles
+ *
+ * @package Worzen
+ * @since 2.0.0
+ */
+
+.worzen-pricing-card {
+    position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.worzen-pricing-card .pricing-card {
+    background-color: #ffffff;
+    padding: 32px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.worzen-pricing-card.featured .pricing-card {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 2px solid #6366f1;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+}
+
+.worzen-pricing-card .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Badge */
+.worzen-pricing-card .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: #ffffff;
+    padding: 4px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3);
+}
+
+/* Plan Name */
+.worzen-pricing-card .plan-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 0;
+    text-align: center;
+}
+
+.worzen-pricing-card.featured .plan-name {
+    margin-top: 12px;
+}
+
+/* Plan Description */
+.worzen-pricing-card .plan-description {
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    opacity: 0.8;
+    text-align: center;
+}
+
+/* Price */
+.worzen-pricing-card .price-container {
+    margin-bottom: 24px;
+}
+
+.worzen-pricing-card .price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    justify-content: center;
+}
+
+.worzen-pricing-card .currency {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.worzen-pricing-card .price {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.worzen-pricing-card .period {
+    font-size: 14px;
+    margin-top: 4px;
+    opacity: 0.8;
+    text-align: center;
+}
+
+/* Features */
+.worzen-pricing-card .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    flex: 1;
+}
+
+.worzen-pricing-card .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.worzen-pricing-card .feature-item.included {
+    opacity: 1;
+}
+
+.worzen-pricing-card .feature-item.excluded {
+    opacity: 0.5;
+}
+
+.worzen-pricing-card .feature-icon {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.worzen-pricing-card .feature-icon.included {
+    color: #10b981;
+}
+
+.worzen-pricing-card .feature-icon.excluded {
+    color: #ef4444;
+}
+
+/* Button */
+.worzen-pricing-card .pricing-button {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 24px;
+    background-color: #6366f1;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.worzen-pricing-card .pricing-button:hover {
+    background-color: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .worzen-pricing-card .pricing-card {
+        padding: 24px 20px;
+    }
+    
+    .worzen-pricing-card .price {
+        font-size: 40px;
+    }
+}
+

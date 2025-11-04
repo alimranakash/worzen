@@ -231,7 +231,7 @@ Gold - $399/year
 
 1. **Hard refresh** - `Ctrl+F5` (Windows) or `Cmd+Shift+R` (Mac)
 2. **Check Tailwind** - Ensure Tailwind CSS is loaded on your site
-3. **Verify files** - Make sure all CSS files exist in `blocks/pricing-table/`
+3. **Verify files** - Make sure all CSS files exist in `blocks/pricing-card/`
 
 ### **Can't Edit Plans?**
 
@@ -253,7 +253,7 @@ A video tutorial will be available soon showing:
 
 ## 📞 Need Help?
 
-- **Documentation**: See `blocks/pricing-table/README.md` for full documentation
+- **Documentation**: See `docs/PRICING-CARD-GUIDE.md` for full documentation
 - **Theme Support**: Contact Worzen theme support
 - **WordPress Help**: Visit WordPress.org support forums
 

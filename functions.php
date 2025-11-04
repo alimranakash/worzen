@@ -252,42 +252,58 @@ function worzen_register_blocks() {
         return;
     }
 
-    // Register the block script with proper dependencies FIRST
+    // ========================================
+    // PRICING CARD BLOCK
+    // ========================================
+
+    // Register pricing card block script
     wp_register_script(
-        'worzen-pricing-block-editor',
-        WORZEN_THEME_URI . '/blocks/pricing-table/block-editor.js',
+        'worzen-pricing-card-editor',
+        WORZEN_THEME_URI . '/blocks/pricing-card/block.js',
         array('wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor', 'wp-components'),
         WORZEN_VERSION,
-        true // Load in footer
+        true
     );
 
-    // Register Pricing Table Block using block.json
+    // Register pricing card block styles
+    wp_register_style(
+        'worzen-pricing-card-editor',
+        WORZEN_THEME_URI . '/blocks/pricing-card/editor.css',
+        array(),
+        WORZEN_VERSION
+    );
+
+    wp_register_style(
+        'worzen-pricing-card-style',
+        WORZEN_THEME_URI . '/blocks/pricing-card/style.css',
+        array(),
+        WORZEN_VERSION
+    );
+
+    // Register Pricing Card Block
     register_block_type(
-        WORZEN_THEME_DIR . '/blocks/pricing-table',
+        WORZEN_THEME_DIR . '/blocks/pricing-card',
         array(
-            'render_callback' => 'worzen_render_pricing_table_block',
-            'editor_script' => 'worzen-pricing-block-editor', // Use our registered script
+            'render_callback' => 'worzen_render_pricing_card',
+            'editor_script' => 'worzen-pricing-card-editor',
+            'editor_style' => 'worzen-pricing-card-editor',
+            'style' => 'worzen-pricing-card-style',
         )
     );
 }
 add_action('init', 'worzen_register_blocks');
 
 /**
- * Render callback for Pricing Table Block
+ * Render callback for Pricing Card Block
  *
  * @param array    $attributes Block attributes.
  * @param string   $content    Block default content.
  * @param WP_Block $block      Block instance.
  * @return string Block HTML output.
  */
-function worzen_render_pricing_table_block($attributes, $content, $block) {
-    // Start output buffering
+function worzen_render_pricing_card($attributes, $content, $block) {
     ob_start();
-
-    // Include the render template
-    include WORZEN_THEME_DIR . '/blocks/pricing-table/render.php';
-
-    // Return the buffered content
+    include WORZEN_THEME_DIR . '/blocks/pricing-card/render.php';
     return ob_get_clean();
 }
 
