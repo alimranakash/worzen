@@ -13,6 +13,7 @@
     var el = wp.element.createElement;
     var registerBlockType = wp.blocks.registerBlockType;
     var InspectorControls = wp.blockEditor.InspectorControls;
+    var InnerBlocks = wp.blockEditor.InnerBlocks;
     var RichText = wp.blockEditor.RichText;
     var PanelBody = wp.components.PanelBody;
     var TextControl = wp.components.TextControl;
@@ -58,6 +59,7 @@
             var backgroundColor = attributes.backgroundColor;
             var textColor = attributes.textColor;
             var buttonColor = attributes.buttonColor;
+            var showButton = attributes.showButton !== undefined ? attributes.showButton : true;
 
             // Helper functions for features
             function addFeature() {
@@ -178,13 +180,20 @@
                                     key: 'button-settings'
                                 },
                                 [
-                                    el(TextControl, {
+                                    el(ToggleControl, {
+                                        label: 'Show Button',
+                                        checked: showButton,
+                                        onChange: function(value) { setAttributes({ showButton: value }); },
+                                        help: 'Toggle to show or hide the CTA button',
+                                        key: 'show-button'
+                                    }),
+                                    showButton && el(TextControl, {
                                         label: 'Button Text',
                                         value: buttonText,
                                         onChange: function(value) { setAttributes({ buttonText: value }); },
                                         key: 'button-text'
                                     }),
-                                    el(TextControl, {
+                                    showButton && el(TextControl, {
                                         label: 'Button URL',
                                         value: buttonUrl,
                                         onChange: function(value) { setAttributes({ buttonUrl: value }); },
@@ -474,8 +483,7 @@
                                     style: {
                                         listStyle: 'none',
                                         padding: '0',
-                                        margin: '0 0 24px 0',
-                                        flex: '1'
+                                        margin: '0 0 24px 0'
                                     }
                                 },
                                 features.map(function(feature, index) {
@@ -518,8 +526,36 @@
                                 })
                             ),
 
-                            // Button
+                            // InnerBlocks Area for Custom Content
                             el(
+                                'div',
+                                {
+                                    key: 'innerblocks-area',
+                                    style: {
+                                        marginBottom: '24px',
+                                        flex: '1'
+                                    }
+                                },
+                                el(InnerBlocks, {
+                                    allowedBlocks: [
+                                        'core/paragraph',
+                                        'core/heading',
+                                        'core/list',
+                                        'core/image',
+                                        'core/buttons',
+                                        'core/button',
+                                        'core/separator',
+                                        'core/spacer',
+                                        'core/group'
+                                    ],
+                                    template: [],
+                                    templateLock: false,
+                                    renderAppender: InnerBlocks.ButtonBlockAppender
+                                })
+                            ),
+
+                            // Button (conditionally rendered)
+                            showButton && el(
                                 RichText,
                                 {
                                     key: 'button',
@@ -549,7 +585,8 @@
         },
 
         save: function() {
-            return null; // Server-side rendering
+            // Use InnerBlocks.Content to save the inner blocks
+            return el(InnerBlocks.Content);
         }
     });
 })();

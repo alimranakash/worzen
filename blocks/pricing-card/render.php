@@ -26,6 +26,7 @@ $show_description = isset($attributes['showDescription']) ? $attributes['showDes
 $background_color = isset($attributes['backgroundColor']) ? $attributes['backgroundColor'] : '#ffffff';
 $text_color = isset($attributes['textColor']) ? $attributes['textColor'] : '#1f2937';
 $button_color = isset($attributes['buttonColor']) ? $attributes['buttonColor'] : '#6366f1';
+$show_button = isset($attributes['showButton']) ? $attributes['showButton'] : true;
 
 // Build wrapper classes
 $wrapper_classes = array('worzen-pricing-card');
@@ -96,12 +97,20 @@ $card_style = sprintf(
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
-        
-        <a href="<?php echo esc_url($button_url); ?>" 
-           class="pricing-button" 
-           style="background-color: <?php echo esc_attr($button_color); ?>;">
-            <?php echo esc_html($button_text); ?>
-        </a>
+
+        <?php if (!empty($content)) : ?>
+            <div class="pricing-card-inner-content">
+                <?php echo $content; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($show_button) : ?>
+            <a href="<?php echo esc_url($button_url); ?>"
+               class="pricing-button"
+               style="background-color: <?php echo esc_attr($button_color); ?>;">
+                <?php echo esc_html($button_text); ?>
+            </a>
+        <?php endif; ?>
         
     </div>
 </div>
