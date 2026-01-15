@@ -304,7 +304,7 @@ get_header();
 </section>
 
 <!-- Pricing Section -->
-<section id="pricing" class="py-20 bg-white">
+<!-- <section id="pricing" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-bold text-gray-900 mb-4">Simple WordPress Plugin Pricing</h2>
@@ -314,7 +314,7 @@ get_header();
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Single Site License -->
+            
             <div class="card-hover bg-white p-8 rounded-2xl border border-gray-200">
                 <div class="text-center mb-8">
                     <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -358,7 +358,6 @@ get_header();
                 </button>
             </div>
 
-            <!-- Developer License -->
             <div class="card-hover bg-white p-8 rounded-2xl border-2 border-primary relative">
                 <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span class="bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
@@ -425,6 +424,17 @@ get_header();
             </div>
         </div>
     </div>
+</section> -->
+
+<section>
+    <div class="container mx-auto px-6 text-center">
+      <?php
+      while ( have_posts() ) :
+          the_post();
+          the_content();
+      endwhile;
+      ?>
+    </div>
 </section>
 
 <!-- CTA Section -->
@@ -437,21 +447,10 @@ get_header();
                 <i class="fas fa-download mr-2"></i>
                 Download Free Plugin
             </a>
-            <a href="https://wordpress.org/support/plugin/suffix-master/" target="_blank" class="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center justify-center border-2 border-white/20">
+            <a href="https://worzen.com/docs/suffix-master/" target="_blank" class="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center justify-center border-2 border-white/20">
                 View Documentation
             </a>
         </div>
-    </div>
-</section>
-
-<section>
-    <div class="container mx-auto px-6 text-center">
-      <?php
-      while ( have_posts() ) :
-          the_post();
-          the_content();
-      endwhile;
-      ?>
     </div>
 </section>
 

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worzen Favicon Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 3px solid white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        .info h3 {
+            margin-top: 0;
+        }
+        .info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Worzen Favicon Generator</h1>
+        
+        <canvas id="favicon" width="512" height="512"></canvas>
+        
+        <div class="buttons">
+            <button onclick="downloadFavicon(512)">Download 512x512 (Site Icon)</button>
+            <button onclick="downloadFavicon(192)">Download 192x192 (Android)</button>
+            <button onclick="downloadFavicon(180)">Download 180x180 (Apple)</button>
+            <button onclick="downloadFavicon(32)">Download 32x32 (Favicon)</button>
+        </div>
+        
+        <div class="info">
+            <h3>📋 How to Use:</h3>
+            <ul>
+                <li><strong>512x512:</strong> Upload to WordPress → Appearance → Customize → Site Identity → Site Icon</li>
+                <li><strong>192x192:</strong> For Android home screen icons</li>
+                <li><strong>180x180:</strong> For Apple touch icons</li>
+                <li><strong>32x32:</strong> Traditional browser favicon</li>
+            </ul>
+            <p><strong>Note:</strong> WordPress will automatically generate all required sizes from the 512x512 image.</p>
+        </div>
+    </div>
+
+    <script>
+        function drawFavicon(size) {
+            const canvas = document.getElementById('favicon');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#6366f1');
+            gradient.addColorStop(0.5, '#8b5cf6');
+            gradient.addColorStop(1, '#ec4899');
+            
+            // Draw background circle
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add overlay gradient
+            const overlayGradient = ctx.createLinearGradient(0, 0, size, size);
+            overlayGradient.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+            overlayGradient.addColorStop(1, 'rgba(255, 255, 255, 0.05)');
+            ctx.fillStyle = overlayGradient;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw "W" letter
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = size * 0.0625; // 32px for 512px canvas
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.globalAlpha = 0.95;
+            
+            ctx.beginPath();
+            ctx.moveTo(size * 0.273, size * 0.3125); // 140, 160
+            ctx.lineTo(size * 0.3515, size * 0.703); // 180, 360
+            ctx.lineTo(size * 0.4296, size * 0.468); // 220, 240
+            ctx.lineTo(size * 0.5, size * 0.703); // 256, 360
+            ctx.lineTo(size * 0.5703, size * 0.468); // 292, 240
+            ctx.lineTo(size * 0.6484, size * 0.703); // 332, 360
+            ctx.lineTo(size * 0.7265, size * 0.3125); // 372, 160
+            ctx.stroke();
+            
+            // Draw accent dot
+            ctx.globalAlpha = 0.9;
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(size/2, size * 0.78125, size * 0.03125, 0, Math.PI * 2); // 256, 400, 16
+            ctx.fill();
+        }
+        
+        function downloadFavicon(size) {
+            drawFavicon(size);
+            
+            const canvas = document.getElementById('favicon');
+            const link = document.createElement('a');
+            link.download = `worzen-icon-${size}x${size}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            // Redraw at 512 for display
+            setTimeout(() => drawFavicon(512), 100);
+        }
+        
+        // Initial draw
+        drawFavicon(512);
+    </script>
+</body>
+</html>
+

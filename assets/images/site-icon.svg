@@ -1,0 +1,34 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle with Gradient -->
+  <circle cx="256" cy="256" r="256" fill="url(#gradient1)"/>
+  
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="gradient1" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    
+    <linearGradient id="gradient2" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Decorative Circle Overlay -->
+  <circle cx="256" cy="256" r="256" fill="url(#gradient2)"/>
+  
+  <!-- Modern "W" Letter -->
+  <path d="M140 160 L180 360 L220 240 L256 360 L292 240 L332 360 L372 160" 
+        stroke="white" 
+        stroke-width="32" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"
+        opacity="0.95"/>
+  
+  <!-- Accent Dot -->
+  <circle cx="256" cy="400" r="16" fill="white" opacity="0.9"/>
+</svg>
+

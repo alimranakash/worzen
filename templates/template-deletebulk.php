@@ -384,7 +384,7 @@ get_header();
 </section>
 
 <!-- Pricing Section -->
-<section id="pricing" class="py-20 bg-white">
+<!-- <section id="pricing" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Choose Your DeleteBulk Version</h2>
@@ -392,7 +392,6 @@ get_header();
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Free Version -->
             <div class="bg-white border border-gray-200 rounded-2xl p-8 card-hover">
                 <div class="text-center">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">DeleteBulk Free</h3>
@@ -438,8 +437,7 @@ get_header();
                     </li>
                 </ul>
             </div>
-
-            <!-- Pro Version -->
+            
             <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white rounded-2xl p-8 card-hover relative">
                 <div class="absolute top-4 right-4 bg-white text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full">
                     Most Popular
@@ -502,6 +500,17 @@ get_header();
             </div>
         </div>
     </div>
+</section> -->
+
+<section>
+    <div class="container mx-auto px-6 text-center">
+      <?php
+      while ( have_posts() ) :
+          the_post();
+          the_content();
+      endwhile;
+      ?>
+    </div>
 </section>
 
 <!-- CTA Section -->
@@ -516,21 +525,10 @@ get_header();
                 </svg>
                 Download Free Plugin
             </a>
-            <a href="https://wordpress.org/support/plugin/deletebulk/" target="_blank" class="bg-indigo-700 hover:bg-indigo-800 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center justify-center border-2 border-white/20">
+            <a href="https://worzen.com/docs/deletebulk/" target="_blank" class="bg-indigo-700 hover:bg-indigo-800 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all inline-flex items-center justify-center border-2 border-white/20">
                 View Documentation
             </a>
         </div>
-    </div>
-</section>
-
-<section>
-    <div class="container mx-auto px-6 text-center">
-      <?php
-      while ( have_posts() ) :
-          the_post();
-          the_content();
-      endwhile;
-      ?>
     </div>
 </section>
 

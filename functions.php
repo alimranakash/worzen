@@ -72,6 +72,11 @@ function worzen_theme_setup() {
         'flex-width'  => true,
     ));
 
+    // Add support for site icon (favicon)
+    // WordPress handles this automatically since 4.3, but we explicitly enable it
+    // Users can upload via Appearance → Customize → Site Identity → Site Icon
+    add_theme_support('custom-header');
+
     // Add support for responsive embedded content
     add_theme_support('responsive-embeds');
 
