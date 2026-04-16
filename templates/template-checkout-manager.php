@@ -109,6 +109,7 @@ get_header();
             <nav class="hidden items-center gap-8 text-sm font-semibold text-slate-600 md:flex">
                 <a href="#features" class="transition hover:text-ink">Features</a>
                 <a href="#preview" class="transition hover:text-ink">Preview</a>
+                <a href="#pro" class="transition hover:text-ink">Pro</a>
                 <a href="#faq" class="transition hover:text-ink">FAQ</a>
                 <a href="https://worzen.com/" target="_blank" rel="noopener noreferrer" class="rounded-full bg-ink px-5 py-3 text-white transition hover:-translate-y-0.5 hover:bg-slate-800">Visit Worzen</a>
             </nav>
@@ -228,6 +229,106 @@ get_header();
                     <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-100 text-sm"><div class="px-6 py-5 font-semibold text-ink">Custom validation rules</div><div class="px-6 py-5 text-slate-400">Basic only</div><div class="px-6 py-5 font-semibold text-emerald-600">Built in</div></div>
                     <div class="grid grid-cols-[1.2fr_1fr_1fr] border-b border-slate-100 text-sm"><div class="px-6 py-5 font-semibold text-ink">Drag-and-drop ordering</div><div class="px-6 py-5 text-slate-400">No</div><div class="px-6 py-5 font-semibold text-emerald-600">Yes</div></div>
                     <div class="grid grid-cols-[1.2fr_1fr_1fr] text-sm"><div class="px-6 py-5 font-semibold text-ink">Import and export configuration</div><div class="px-6 py-5 text-slate-400">No</div><div class="px-6 py-5 font-semibold text-emerald-600">JSON based</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 py-20 lg:px-8" id="pro">
+            <div class="mx-auto max-w-7xl">
+                <div class="reveal flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                    <div class="max-w-3xl">
+                        <p class="text-sm font-bold uppercase tracking-[0.28em] text-brand-700">Premium features</p>
+                        <h2 class="mt-4 font-display text-3xl font-extrabold text-ink sm:text-4xl">Pro Feature Tiers</h2>
+                    </div>
+                    <p class="max-w-2xl text-lg leading-8 text-slate-600">Unlock advanced features that give your checkout intelligent behavior, role-based access, and multi-step flows.</p>
+                </div>
+                <div class="mt-12 grid gap-8 lg:grid-cols-3">
+                    <!-- TIER 1 -->
+                    <div class="reveal rounded-[24px] border border-slate-200 bg-white p-8 shadow-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-extrabold text-brand-600">TIER 1</div>
+                                <h3 class="mt-2 text-xl font-bold text-ink">Role & Permission Management</h3>
+                            </div>
+                            <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">Pro</span>
+                        </div>
+                        <ul class="mt-6 space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">User role restrictions — assign field access per role</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Field-level permissions — lock fields from non-admins</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Audit log — track all field changes with timestamp/user</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- TIER 2 -->
+                    <div class="reveal rounded-[24px] border border-slate-200 bg-white p-8 shadow-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-extrabold text-brand-600">TIER 2</div>
+                                <h3 class="mt-2 text-xl font-bold text-ink">Advanced Dynamic Logic</h3>
+                            </div>
+                            <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">Pro</span>
+                        </div>
+                        <ul class="mt-6 space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Multi-condition rules (AND/OR logic)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Auto-calculated fields (formulas, not just show/hide)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Conditional field groups — hide entire sections</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Branching checkout paths based on customer/product type</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- TIER 3 -->
+                    <div class="reveal rounded-[24px] border border-slate-200 bg-white p-8 shadow-card">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-3xl font-extrabold text-brand-600">TIER 3</div>
+                                <h3 class="mt-2 text-xl font-bold text-ink">Multi-Step Checkout</h3>
+                            </div>
+                            <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">Pro</span>
+                        </div>
+                        <ul class="mt-6 space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Step builder — segment checkout into digestible steps</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Progress indicator & validation per step</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Abandoned cart recovery (save progress)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Step-specific styling</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand-500 flex-shrink-0"></span>
+                                <span class="leading-6">Bonus: Field prefill templates, advanced export, REST API access</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
