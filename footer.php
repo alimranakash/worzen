@@ -17,7 +17,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Footer Widgets / Content -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
                 
                 <!-- Company Info Column -->
                 <div class="md:col-span-2">
@@ -82,10 +82,26 @@
                     </div>
                 </div>
 
-                <!-- Footer Widget Area 1 - Quick Links -->
+                <!-- Footer Widget Area 1 - Product -->
                 <div>
                     <?php if (is_active_sidebar('footer-1')) : ?>
                         <?php dynamic_sidebar('footer-1'); ?>
+                    <?php else : ?>
+                        <h4 class="text-lg font-semibold text-white mb-4"><?php esc_html_e('Products', 'worzen'); ?></h4>
+                        <ul class="space-y-2">
+                            <li><a href="<?php echo esc_url(home_url('/deletebulk')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('DeleteBulk', 'worzen'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/suffix-master')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Suffix Master', 'worzen'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/universal-blocks')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Universal Blocks', 'worzen'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/instant-page-load')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Instant Page Load', 'worzen'); ?></a></li>
+                            <li><a href="<?php echo esc_url(home_url('/product-view-count')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Product View Count', 'worzen'); ?></a></li>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Footer Widget Area 2 - Quick Links -->
+                <div>
+                    <?php if (is_active_sidebar('footer-2')) : ?>
+                        <?php dynamic_sidebar('footer-2'); ?>
                     <?php else : ?>
                         <h4 class="text-lg font-semibold text-white mb-4"><?php esc_html_e('Quick Links', 'worzen'); ?></h4>
                         <?php
@@ -103,6 +119,7 @@
                                 <li><a href="<?php echo esc_url(home_url('/about')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('About', 'worzen'); ?></a></li>
                                 <li><a href="<?php echo esc_url(home_url('/blog')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Blog', 'worzen'); ?></a></li>
                                 <li><a href="<?php echo esc_url(home_url('/contact')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Contact', 'worzen'); ?></a></li>
+                                <li><a href="<?php echo esc_url(home_url('/products')); ?>" class="hover:text-white transition duration-300"><?php esc_html_e('Products', 'worzen'); ?></a></li>
                             </ul>
                             <?php
                         }
@@ -110,10 +127,10 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Footer Widget Area 2 - Support -->
+                <!-- Footer Widget Area 3 - Support -->
                 <div>
-                    <?php if (is_active_sidebar('footer-2')) : ?>
-                        <?php dynamic_sidebar('footer-2'); ?>
+                    <?php if (is_active_sidebar('footer-3')) : ?>
+                        <?php dynamic_sidebar('footer-3'); ?>
                     <?php else : ?>
                         <h4 class="text-lg font-semibold text-white mb-4"><?php esc_html_e('Support', 'worzen'); ?></h4>
                         <ul class="space-y-2">
